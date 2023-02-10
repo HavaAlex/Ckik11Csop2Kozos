@@ -1,0 +1,43 @@
+#jatekter{
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    height: 40vw;
+}
+#balpanel{
+    width: 30%;
+    border: 1px solid orange;
+    height: 40vw;
+}
+#kartyabox{
+    border: 1px solid red;
+    height: 20vw;
+}
+#pontokbox{
+    border: 1px solid blue;
+    height: 20vw;
+}
+#tabla{
+    width: 60%;
+    border: 1px solid green;
+    height: 40vw;
+    display: flex;
+    flex-direction: column;
+}
+#korokbox{
+    width: 10%;
+    border: 1px solid yellow;
+    height: 40vw;
+}
+.sordiv{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    height: 8vw;
+}
+.oszlopdiv{
+    border: 1px solid red;
+    width: 16.6%;
+    margin: 5px;
+}
