@@ -48,12 +48,22 @@ function TablaGeneralas()
 
 function tablafeltoltes (db)
 {
+    for (let index = 0; index < db; index++)
+    {
+        var randomhely = Math.floor(Math.random()*29);
+        var temphely = document.getElementById(randomhely);
+        var img = document.createElement("img");
+        var randomkep = Math.floor(Math.random()*23)+1;
+        img.src = "img/" + randomkep + ".png";
+        temphely.appendChild(img);
 
+    }
 }
 function Main()
 {
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
+    tablafeltoltes(5);
 }
 Main();
