@@ -46,27 +46,64 @@ function TablaGeneralas()
     }
 }
 
-function tablafeltoltes (db)
+function tablafeltoltes ()
 {
     var kepnevek = [];
+    var toronynevek = [];
     var indexek = [] ;
-    for (let index = 0; index < db; index++)
+    for (let index = 0; index < 23; index++)
     {
-        
-        var randomhely = Math.floor(Math.random()*29);
-        
-        if(!indexek.includes(randomhely)){
-            indexek.push(randomhely);
-            var temphely = document.getElementById(randomhely);
+        var randomhely = Math.floor(Math.random()*30);
+        while(indexek.includes(randomhely))
+        {
+            var randomhely = Math.floor(Math.random()*30);
+
         }
+        // ? A random hely csak uj szam lehet jelenleg?
+        indexek.push(randomhely);
 
-        
-        var img = document.createElement("img");
+        // a kocka kivalasztva
+        var temphely = document.getElementById(randomhely);
+
+
         var randomkep = Math.floor(Math.random()*23)+1;
-        img.src = "img/" + randomkep + ".png";
+        while(kepnevek.includes(randomkep))
+        {
+            var randomkep = Math.floor(Math.random()*23)+1;
+        }
+        kepnevek.push(randomkep);
+        // ? A randomkep csak uj szam lehet jelenleg?
 
+        var img = document.createElement("img");
+        img.src = "img/" + randomkep + ".png";
         temphely.appendChild(img);
 
+    }
+        // !kepek mar mukodnek, kell a torony
+    for (let index = 0; index < 7; index++)
+    {
+        var randomhely = Math.floor(Math.random()*30);
+        while(indexek.includes(randomhely))
+        {
+            var randomhely = Math.floor(Math.random()*30);
+
+        }
+        // ? A random hely csak uj szam lehet jelenleg?
+        indexek.push(randomhely);
+
+        // a kocka kivalasztva
+        var temphely = document.getElementById(randomhely);
+
+        var randomkep = Math.floor(Math.random()*16)+1;
+
+        while(toronynevek.includes(randomkep))
+        {
+            var randomkep = Math.floor(Math.random()*16)+1;
+        }
+        toronynevek.push(randomkep);
+        var img = document.createElement("img");
+        img.src = "tornyok 1/" + randomkep +".png";
+        temphely.appendChild(img);
 
     }
 }
