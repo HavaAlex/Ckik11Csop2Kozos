@@ -40,7 +40,7 @@ body{
 #tabla{
     text-align: center;
     border-radius: 5px;
-    width: 60%;
+    width: 50vw;
     border: 1px solid green;
     height: 40vw;
     display: flex;
@@ -49,7 +49,7 @@ body{
 #korokbox{
     text-align: center;
     border-radius: 5px;
-    width: 10%;
+    width: 20vw;
     border: 1px solid yellow;
     height: 40vw;
 }
@@ -62,7 +62,7 @@ body{
 }
 .oszlopdiv{
     border-radius: 5px;
-    border: 1px solid red;
+    border: 2px solid red;
     width: 16.6%;
     margin: 5px;
     border-radius: 10px;
