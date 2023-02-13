@@ -48,14 +48,25 @@ function TablaGeneralas()
 
 function tablafeltoltes (db)
 {
+    var kepnevek = [];
+    var indexek = [] ;
     for (let index = 0; index < db; index++)
     {
+        
         var randomhely = Math.floor(Math.random()*29);
-        var temphely = document.getElementById(randomhely);
+        
+        if(!indexek.includes(randomhely)){
+            indexek.push(randomhely);
+            var temphely = document.getElementById(randomhely);
+        }
+
+        
         var img = document.createElement("img");
         var randomkep = Math.floor(Math.random()*23)+1;
         img.src = "img/" + randomkep + ".png";
+
         temphely.appendChild(img);
+
 
     }
 }
