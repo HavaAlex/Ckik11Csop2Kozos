@@ -45,10 +45,9 @@ function TablaGeneralas()
         tabla.appendChild(sorDiv);
     }
 }
-
+var kepnevek = [];
 function tablafeltoltes ()
 {
-    var kepnevek = [];
     var toronynevek = [];
     var indexek = [] ;
     for (let index = 0; index < 23; index++)
@@ -76,6 +75,7 @@ function tablafeltoltes ()
 
         var img = document.createElement("img");
         img.src = "img/" + randomkep + ".png";
+        img.id = "pont"
         temphely.appendChild(img);
 
     }
@@ -103,15 +103,40 @@ function tablafeltoltes ()
         toronynevek.push(randomkep);
         var img = document.createElement("img");
         img.src = "tornyok 1/" + randomkep +".png";
+        img.id = "nempont"
         temphely.appendChild(img);
 
     }
 }
+function pontozas() {
+    const arr = [-3, 2, 5, 4, 3, 0, -6, 6, 0, 0, -5, 4, 0, 5, 6, -4, 1, -1, -2, 3, 2, 0, 1];
+    var karyaszam = 1;
+    var kocka = 0;
+    var pontokhely = document.createElement("div");
+    for (let index = 0; index < 30; index++)
+    {
+        const div = document.getElementById(`kocka`);
+        if (div !== null) {
+            var image = div.querySelector("pont");
+        }
+        console.log(image)
+        if (image !== null) {
+            console.log(`The image with id 'pont' is found in div ${index}.`);
+            karyaszam++;
+        }
+        kocka ++;
+        // console.log(pontok);
+        // var temp = document.createElement("p");
+        // temp.innerHTML = pontok;
+        // pontokhely.appendChild(temp);
+    }
+  }
 function Main()
 {
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
-    tablafeltoltes(5);
+    tablafeltoltes();
+    pontozas();
 }
 Main();
