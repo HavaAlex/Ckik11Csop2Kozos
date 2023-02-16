@@ -27,7 +27,7 @@ function JatekterElrendezes()
     tabla.id = "tabla";
     korokBox.id = "korokbox";
 }
-var k = 0;
+var k = 1;
 function TablaGeneralas()
 {
     for(var i = 0; i < 5; i++)
@@ -46,16 +46,17 @@ function TablaGeneralas()
     }
 }
 var kepnevek = [];
+var toronynevek = [];
+var indexek = [] ;
 function tablafeltoltes ()
 {
-    var toronynevek = [];
-    var indexek = [] ;
+
     for (let index = 0; index < 23; index++)
     {
-        var randomhely = Math.floor(Math.random()*30);
+        var randomhely = Math.floor(Math.random()*30)+1;
         while(indexek.includes(randomhely))
         {
-            var randomhely = Math.floor(Math.random()*30);
+            var randomhely = Math.floor(Math.random()*30)+1;
 
         }
         // ? A random hely csak uj szam lehet jelenleg?
@@ -82,10 +83,10 @@ function tablafeltoltes ()
         // !kepek mar mukodnek, kell a torony
     for (let index = 0; index < 7; index++)
     {
-        var randomhely = Math.floor(Math.random()*30);
+        var randomhely = Math.floor(Math.random()*30)+1;
         while(indexek.includes(randomhely))
         {
-            var randomhely = Math.floor(Math.random()*30);
+            var randomhely = Math.floor(Math.random()*30)+1;
 
         }
         // ? A random hely csak uj szam lehet jelenleg?
@@ -108,29 +109,62 @@ function tablafeltoltes ()
 
     }
 }
+
+// var kepnevek = []; melyik kartya
+// var indexek = [] ; hova ment
+const pontok = [-3, 2, 5, 4, 3, 0, -6, 6, 0, 0, -5, 4, 0, 5, 6, -4, 1, -1, -2, 3, 2, 0, 1]; // a kartyak erteke
+
 function pontozas() {
-    const arr = [-3, 2, 5, 4, 3, 0, -6, 6, 0, 0, -5, 4, 0, 5, 6, -4, 1, -1, -2, 3, 2, 0, 1];
-    var karyaszam = 1;
-    var kocka = 0;
-    var pontokhely = document.createElement("div");
-    for (let index = 0; index < 30; index++)
+
+    var vegpontok = [0,0,0,0,0]
+
+    for (var index = 0; index < kepnevek.length; index++) 
     {
-        const div = document.getElementById(`kocka`);
-        if (div !== null) {
-            var image = div.querySelector("pont");
+        if (indexek[index] < 7) {
+            var kep = kepnevek[index]
+            vegpontok[0] += pontok[kep-1];
         }
-        console.log(image)
-        if (image !== null) {
-            console.log(`The image with id 'pont' is found in div ${index}.`);
-            karyaszam++;
+        else if(indexek[index] < 13){
+            var kep = kepnevek[index]
+            vegpontok[1] += pontok[kep-1];
         }
-        kocka ++;
-        // console.log(pontok);
-        // var temp = document.createElement("p");
-        // temp.innerHTML = pontok;
-        // pontokhely.appendChild(temp);
+        else if(indexek[index] < 19){
+            var kep = kepnevek[index]
+            vegpontok[2] += pontok[kep-1];
+        }
+        else if(indexek[index] < 25){
+            var kep = kepnevek[index]
+            vegpontok[3] += pontok[kep-1];
+        }
+        else if(indexek[index] < 31){
+            var kep = kepnevek[index]
+            vegpontok[4] += pontok[kep-1];
+        }
     }
+    // console.log(vegpontok[0]);
+    // console.log(vegpontok[1]);
+    // console.log(vegpontok[2]);
+    // console.log(vegpontok[3]);
+    // console.log(vegpontok[4]);
+    var pontokhely = document.createElement("div");
+    var temp = document.createElement("p");
+    temp.innerHTML = vegpontok[0];
+    pontokBox.appendChild(pontokhely)
+    temp.innerText+=", "
+    temp.innerHTML += vegpontok[1];
+    pontokhely.appendChild(temp);
+    temp.innerText+=", "
+    temp.innerHTML += vegpontok[2];
+    pontokhely.appendChild(temp);
+    temp.innerText+=", "
+    temp.innerHTML += vegpontok[3];
+    pontokhely.appendChild(temp);
+    temp.innerText+=", "
+    temp.innerHTML += vegpontok[4];
+    pontokhely.appendChild(temp);
+
   }
+
 function Main()
 {
     JatekterBetoltes();
@@ -138,5 +172,7 @@ function Main()
     TablaGeneralas();
     tablafeltoltes();
     pontozas();
+    console.log(kepnevek)
+    console.log(indexek)
 }
 Main();
