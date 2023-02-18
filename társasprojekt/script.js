@@ -6,6 +6,33 @@ var pontokBox = document.createElement("div");
 var tabla = document.createElement("div");
 var korokBox = document.createElement("div");
 
+var kartyak=[
+    {id:1,value:-3,sign:''},
+    {id:2,value:2,sign:''},
+    {id:3,value:5,sign:''},
+    {id:4,value:4,sign:''},
+    {id:5,value:3,sign:''},
+    {id:6,value:0,sign:'pap'},
+    {id:7,value:-6,sign:''},
+    {id:8,value:6,sign:''},
+    {id:9,value:0,sign:'taliga'},
+    {id:10,value:0,sign:'hegy'},
+    {id:11,value:-5,sign:''},
+    {id:12,value:4,sign:''},
+    {id:13,value:0,sign:'sarkany'},
+    {id:14,value:5,sign:''},
+    {id:15,value:6,sign:''},
+    {id:16,value:-4,sign:''},
+    {id:17,value:1,sign:''},
+    {id:18,value:-1,sign:''},
+    {id:19,value:-2,sign:''},
+    {id:20,value:3,sign:''},
+    {id:21,value:2,sign:''},
+    {id:22,value:0,sign:'hegy'},
+    {id:23,value:1,sign:''}
+  ]
+  
+
 function JatekterBetoltes()
 {
     balPanel.appendChild(kartyaBox);
