@@ -98,7 +98,6 @@ function tablafeltoltes ()
         indexek.push(randomhely);
 
         // a kocka kivalasztva
-        var temphely = document.getElementById(randomhely);
 
 
         var randomkep = Math.floor(Math.random()*23)+1;

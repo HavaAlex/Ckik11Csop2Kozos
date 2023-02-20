@@ -32,13 +32,26 @@ var kartyak=[
     {id:23,value:1,sign:''}
   ]
 
-var cellak = [
-    // {
-    //     id:1,
-    //     type:"" //var, kartya
-    //     //kartya/ var tartalma
-    // }
-];
+var tornyok = [
+    {id:1, value:1},
+    {id:2, value:2},
+    {id:3, value:3},
+    {id:4, value:4},
+    {id:5, value:1},
+    {id:6, value:2},
+    {id:7, value:3},
+    {id:8, value:4},
+    {id:9, value:1},
+    {id:10,value:2},
+    {id:11,value:3},
+    {id:12,value:4},
+    {id:13,value:1},
+    {id:14,value:2},
+    {id:15,value:3},
+    {id:16,value:4}
+]
+
+var cellak = [];
 
 function JatekterBetoltes()
 {
@@ -81,31 +94,51 @@ function TablaGeneralas()
     }
     console.log(cellak)
 }
-var kepnevek = [];
-var toronynevek = [];
-var indexek = [] ;
 
 function cellakFeltoltese(){
+
+    var hasznaltkepek = [];
+    var hasznalthelyek = [];
+
+
     for (let index = 0; index < 23; index++)
     {
-        cellak[index].type="Kártya";
-        cellak[index].kartya=kartyak[index]; 
+        var randomhely = Math.floor(Math.random()*30)+1;
+        while(cellak[randomhely] === undefined)
+        {
+            var randomhely = Math.floor(Math.random()*30)+1;
+        }
+        hasznalthelyek.push(randomhely);
+
+        var randomkep = Math.floor(Math.random()*23)+1;
+        while(hasznaltkepek.includes(randomkep))
+        {
+            var randomkep = Math.floor(Math.random()*23)+1;
+        }
+        hasznaltkepek.push(randomkep);
+        cellak[randomhely].type="Kártya";
+        cellak[randomhely].kartya=kartyak[randomkep]; 
+        var temphely = document.getElementById(randomhely);
+        var img = document.createElement("img");
+        img.src = "img/" + randomkep + ".png";
+        temphely.appendChild(img);
     }
-    for (let index = 23; index < 30; index++) {
-        cellak[index].type ="vár";
-        cellak[index].kartya=varak[index-23];
+    // for (let index = 23; index < 30; index++) {
+    //     var
+    //     cellak[index].type ="vár";
+    //     cellak[index].kartya=tornyok[index-23];
         
-    }
+    // }
+    console.log(hasznalthelyek)
     console.log(cellak)
 }
-//hf feltoltes atir hogy minden kartyabol veletlenszeruen egy keruljön be
-// tomb alapján jelenitsd meg a kepeket
+// hf feltoltes atir hogy minden kartyabol veletlenszeruen egy keruljön be
+// tomb alapján jelenitsd meg a kepeket 
 function Main()
 {
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
     cellakFeltoltese();
-
 }
 Main();
