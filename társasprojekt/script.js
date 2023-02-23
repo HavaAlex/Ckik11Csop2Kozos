@@ -51,7 +51,8 @@ var tornyok = [
     {id:16,value:4}
 ]
 
-var cellak = [];
+var cellak = [
+];
 
 function JatekterBetoltes()
 {
@@ -92,19 +93,22 @@ function TablaGeneralas()
         }
         tabla.appendChild(sorDiv);
     }
-    console.log(cellak)
+
 }
 
 function cellakFeltoltese(){
 
     var hasznaltkepek = [];
     var hasznalthelyek = [];
+    var hasznalttornyok = [];
+
 
 
     for (let index = 0; index < 23; index++)
     {
+        
         var randomhely = Math.floor(Math.random()*30)+1;
-        while(cellak[randomhely] === undefined)
+        while(hasznalthelyek.includes(randomhely))
         {
             var randomhely = Math.floor(Math.random()*30)+1;
         }
@@ -116,29 +120,75 @@ function cellakFeltoltese(){
             var randomkep = Math.floor(Math.random()*23)+1;
         }
         hasznaltkepek.push(randomkep);
-        cellak[randomhely].type="Kártya";
-        cellak[randomhely].kartya=kartyak[randomkep]; 
-        var temphely = document.getElementById(randomhely);
-        var img = document.createElement("img");
-        img.src = "img/" + randomkep + ".png";
-        temphely.appendChild(img);
+        cellak[randomhely-1].kartyae=true;
+        cellak[randomhely-1].kartya=kartyak[randomkep-1]; 
+        // var temphely = document.getElementById(randomhely);
+        // var img = document.createElement("img");
+        // img.src = "img/" + randomkep + ".png";
+        // temphely.appendChild(img);
     }
-    // for (let index = 23; index < 30; index++) {
-    //     var
-    //     cellak[index].type ="vár";
-    //     cellak[index].kartya=tornyok[index-23];
+    for (let index = 0; index < 7; index++) {
+        var randomhely = Math.floor(Math.random()*30)+1;
+        while(hasznalthelyek.includes(randomhely))
+        {
+            var randomhely = Math.floor(Math.random()*30)+1;
+        }
+        hasznalthelyek.push(randomhely);
+
+        var randomkep = Math.floor(Math.random()*16)+1;
+        while(hasznalttornyok.includes(randomkep))
+        {
+            var randomkep = Math.floor(Math.random()*16)+1;
+        }
+        cellak[randomhely-1].kartyae=false;
+        cellak[randomhely-1].kartya=tornyok[randomkep-1]; 
         
-    // }
-    console.log(hasznalthelyek)
-    console.log(cellak)
+    }
+
+    for (let i = 0; i < cellak.length; i++) {
+        if (cellak[i].kartyae === true) {
+            var temphely = document.getElementById(i+1);
+            var img = document.createElement("img");
+            img.src = "img/" + cellak[i].kartya.id + ".png";
+            temphely.appendChild(img);
+        }
+        else{
+            var temphely = document.getElementById(i+1);
+            var img = document.createElement("img");
+            img.src = "tornyok/" + cellak[i].kartya.id + ".png";
+            temphely.appendChild(img);
+        }
+    }
+
 }
-// hf feltoltes atir hogy minden kartyabol veletlenszeruen egy keruljön be
-// tomb alapján jelenitsd meg a kepeket 
+
+function pontozas(){
+    var pont = 0;
+    var sor= 0;
+    for (let sor = 0; sor < 5; sor++) {
+        for (let oszlop = 0; oszlop < 6; oszlop++) {
+            pont += cellak[29].kartya.value;
+            console.log(pont)
+        }
+        console.log(pont)
+        pont = 0;
+    }
+
+}
+        // for (let oszlop = 0; oszlop < 6; oszlop++) {
+            
+        // }
+        // pont += cellak[index].kartya.value;
+
 function Main()
 {
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
     cellakFeltoltese();
+    console.log(cellak)
+    pontozas();
+
 }
+
 Main();
