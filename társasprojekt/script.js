@@ -81,7 +81,7 @@ function TablaGeneralas()
     for(var i = 0; i < 5; i++)
     {
         var sorDiv = document.createElement("div");
-        sorDiv.classList += " sordiv";
+        sorDiv.classList += "sordiv";
         for(var j = 0; j<6;j++)
         {
             var oszlopDiv = document.createElement("div");
@@ -145,21 +145,6 @@ function cellakFeltoltese(){
         
     }
 
-    for (let i = 0; i < cellak.length; i++) {
-        if (cellak[i].kartyae === true) {
-            var temphely = document.getElementById(i+1);
-            var img = document.createElement("img");
-            img.src = "img/" + cellak[i].kartya.id + ".png";
-            temphely.appendChild(img);
-        }
-        else{
-            var temphely = document.getElementById(i+1);
-            var img = document.createElement("img");
-            img.src = "tornyok/" + cellak[i].kartya.id + ".png";
-            temphely.appendChild(img);
-        }
-    }
-
 }
 
 function pontozas(){
@@ -184,10 +169,55 @@ function pontozas(){
     }
 
 }
-        // for (let oszlop = 0; oszlop < 6; oszlop++) {
-            
-        // }
-        // pont += cellak[index].kartya.value;
+
+
+var nemk=31;
+function cucc(){
+
+
+    for(var i = 0; i < 5; i++)
+    {
+        var sorDiv = document.createElement("div");
+        sorDiv.classList += "K_sordiv";
+        for(var j = 0; j<6;j++)
+        {
+            var oszlopDiv = document.createElement("div");
+            oszlopDiv.classList += "K_oszlopdiv";
+            oszlopDiv.id = nemk;
+            nemk++;
+            oszlopDiv.setAttribute("onclick","KepCserelo(this)");
+            sorDiv.appendChild(oszlopDiv);
+        }
+        kartyaBox.appendChild(sorDiv);
+    }
+
+
+    // kepekBerakasa
+
+    for (let i = 0; i < cellak.length; i++) {
+        if (cellak[i].kartyae === true) {
+            var temphely = document.getElementById(i+31);
+            var img = document.createElement("img");
+            img.src = "img/" + cellak[i].kartya.id + ".png";
+            img.width = "10px";
+            img.height = "10px";
+            temphely.appendChild(img);
+        }
+        else{
+            var temphely = document.getElementById(i+31);
+            var img = document.createElement("img");
+            img.src = "tornyok/" + cellak[i].kartya.id + ".png";
+            temphely.appendChild(img);
+        }
+    }
+}
+
+function KepCserelo(div){
+    var temp = div.id;
+    var kep = document.getElementById("temp");
+    console.log(temp);
+    console.log(kep);
+}
 
 function Main()
 {
@@ -196,6 +226,7 @@ function Main()
     TablaGeneralas();
     cellakFeltoltese();
     console.log(cellak)
+    cucc();
     pontozas();
 
 }

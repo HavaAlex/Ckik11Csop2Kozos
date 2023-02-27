@@ -26,7 +26,7 @@ body{
 #kartyabox{
     border-radius: 5px;
     border: 1px solid red;
-    height: 20vw;
+    height: 26vw;
     background-color: var(--kartybox);
     text-align: center;
 }
@@ -72,6 +72,20 @@ img{
     width: 100%;
     height: 100%;
     border-radius: 10px;
-
 }
 
+
+.K_sordiv{
+    border-radius: 5px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    height: 5vw;
+}
+.K_oszlopdiv{
+    border-radius: 5px;
+    border: 2px solid red;
+    width: 16.6%;
+    margin: 5px;
+    border-radius: 10px;
+}
