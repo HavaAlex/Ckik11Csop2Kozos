@@ -163,15 +163,24 @@ function cellakFeltoltese(){
 }
 
 function pontozas(){
-    var pont = 0;
-    var sor= 0;
-    for (let sor = 0; sor < 5; sor++) {
-        for (let oszlop = 0; oszlop < 6; oszlop++) {
-            pont += cellak[29].kartya.value;
-            console.log(pont)
+    
+    for (let sor = 0; sor < 30; sor+=6) {
+        var pont = 0;
+        for (let oszlop = sor; oszlop < sor+6; oszlop++){
+            if(cellak[oszlop].kartyae==true){
+                pont += cellak[oszlop].kartya.value;
+            }
         }
-        console.log(pont)
-        pont = 0;
+        console.log(pont);
+    }
+    for (let sor = 0; sor < 6; sor++) {
+        var pont = 0;
+        for (let oszlop = sor; oszlop < 30; oszlop+=6){
+            if(cellak[oszlop].kartyae==true){
+                pont += cellak[oszlop].kartya.value;
+            }
+        }
+        console.log(pont);
     }
 
 }
