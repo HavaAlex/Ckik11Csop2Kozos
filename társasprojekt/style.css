@@ -26,7 +26,7 @@ body{
 #kartyabox{
     border-radius: 5px;
     border: 1px solid red;
-    height: 26vw;
+    height: 19vw;
     background-color: var(--kartybox);
     text-align: center;
 }
@@ -89,3 +89,43 @@ img{
     margin: 5px;
     border-radius: 10px;
 }
+
+
+.gomb {
+    background-color: greenyellow;
+    border: 2px solid green;
+    color: black;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-family: Verdana, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+.gomb:hover {
+    background-color: gray;
+    border-color: var(--vilagoskek);
+    color: black;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+  
+  .gomb:active {
+    background-color: greenyellow;
+    border-color: green;
+    color: black;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+#TempKartya img{
+    /* border: 2px solid greenyellow;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; */
+    height: 100px;
+    width: 100px;
+}
+
+  

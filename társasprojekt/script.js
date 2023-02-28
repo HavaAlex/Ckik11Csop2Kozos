@@ -5,6 +5,7 @@ var kartyaBox = document.createElement("div");
 var pontokBox = document.createElement("div");
 var tabla = document.createElement("div");
 var korokBox = document.createElement("div");
+var TempKartya = document.createElement("div");
 
 var kartyak=[
     {id:1,value:-3,sign:''},
@@ -61,11 +62,13 @@ function JatekterBetoltes()
     jatekTer.appendChild(balPanel);
     jatekTer.appendChild(tabla);
     jatekTer.appendChild(korokBox);
+    document.body.appendChild(TempKartya);
 
     kartyaBox.innerHTML = "kartyaBox";
     pontokBox.innerHTML = "pontokBox";
     tabla.innerHTML = "tabla";
     korokBox.innerHTML = "korokBox";
+    TempKartya.innerHTML = "TempKartya";
 }
 function JatekterElrendezes()
 {
@@ -74,6 +77,7 @@ function JatekterElrendezes()
     pontokBox.id = "pontokbox";
     tabla.id = "tabla";
     korokBox.id = "korokbox";
+    TempKartya.id ="TempKartya"
 }
 var k = 1;
 function TablaGeneralas()
@@ -87,6 +91,7 @@ function TablaGeneralas()
             var oszlopDiv = document.createElement("div");
             oszlopDiv.classList += " oszlopdiv";
             oszlopDiv.id = k;
+            oszlopDiv.setAttribute("onclick","cellaRanyom(this)")
             cellak.push({id:k})
             k++;
             sorDiv.appendChild(oszlopDiv);
@@ -122,10 +127,6 @@ function cellakFeltoltese(){
         hasznaltkepek.push(randomkep);
         cellak[randomhely-1].kartyae=true;
         cellak[randomhely-1].kartya=kartyak[randomkep-1]; 
-        // var temphely = document.getElementById(randomhely);
-        // var img = document.createElement("img");
-        // img.src = "img/" + randomkep + ".png";
-        // temphely.appendChild(img);
     }
     for (let index = 0; index < 7; index++) {
         var randomhely = Math.floor(Math.random()*30)+1;
@@ -144,7 +145,7 @@ function cellakFeltoltese(){
         cellak[randomhely-1].kartya=tornyok[randomkep-1]; 
         
     }
-
+    console.log(hasznalttornyok)
 }
 
 function pontozas(){
@@ -170,54 +171,70 @@ function pontozas(){
 
 }
 
-
-var nemk=31;
 function cucc(){
+    var gomb = document.createElement("input");
+    gomb.style.display ="block"
+    gomb.type = "button";
+    gomb.value = "Kártya felhuzása";
+    gomb.style.marginTop="10vw";
+    gomb.style.marginLeft="9vw";
+    gomb.className="gomb";
+    gomb.id=31;
+    gomb.setAttribute("onclick","KepKirako(this)");
+    kartyaBox.appendChild(gomb);
+}
 
+var ranyom = false
 
-    for(var i = 0; i < 5; i++)
-    {
-        var sorDiv = document.createElement("div");
-        sorDiv.classList += "K_sordiv";
-        for(var j = 0; j<6;j++)
-        {
-            var oszlopDiv = document.createElement("div");
-            oszlopDiv.classList += "K_oszlopdiv";
-            oszlopDiv.id = nemk;
-            nemk++;
-            oszlopDiv.setAttribute("onclick","KepCserelo(this)");
-            sorDiv.appendChild(oszlopDiv);
-        }
-        kartyaBox.appendChild(sorDiv);
-    }
-
-
-    // kepekBerakasa
-
-    for (let i = 0; i < cellak.length; i++) {
-        if (cellak[i].kartyae === true) {
-            var temphely = document.getElementById(i+31);
+var gomb;
+function KepKirako(div){
+    ranyom = true
+    gomb = div;
+    gomb.setAttribute("onclick","");
+    console.log(div.id)
+    var temp = cellak[div.id-31];
+    console.log(temp.id);
+    console.log(temp);
+        if (temp.kartyae === true) {
             var img = document.createElement("img");
-            img.src = "img/" + cellak[i].kartya.id + ".png";
-            img.width = "10px";
-            img.height = "10px";
-            temphely.appendChild(img);
+            img.src = "img/" + temp.kartya.id + ".png";
+            TempKartya.appendChild(img);
         }
         else{
-            var temphely = document.getElementById(i+31);
             var img = document.createElement("img");
-            img.src = "tornyok/" + cellak[i].kartya.id + ".png";
-            temphely.appendChild(img);
+            img.src = "tornyok/" + temp.kartya.id + ".png";
+            TempKartya.appendChild(img);
         }
-    }
 }
 
-function KepCserelo(div){
-    var temp = div.id;
-    var kep = document.getElementById("temp");
-    console.log(temp);
-    console.log(kep);
+function cellaRanyom(div){
+    console.log(ranyom);
+    if (ranyom == true)  {
+        var cella = div
+        console.log(cellak[gomb.id-31].id);
+        console.log(cella.id)
+        console.log("van kep");
+        console.log(cellak[gomb.id-31].id);
+        if (cellak[gomb.id-31].kartyae==true) {
+            var img = document.createElement("img");
+            img.src = "img/" + cellak[gomb.id-31].kartya.id + ".png";
+            cella.appendChild(img);
+        }
+        else{
+            var img = document.createElement("img");
+            img.src = "tornyok/" + cellak[gomb.id-31].kartya.id + ".png";
+            cella.appendChild(img);
+        }
+        cella.setAttribute("onclick","")
+
+        gomb.id++;
+        gomb.setAttribute("onclick","KepKirako(this)");
+        
+    }
+    ranyom = false
+
 }
+
 
 function Main()
 {
@@ -227,8 +244,28 @@ function Main()
     cellakFeltoltese();
     console.log(cellak)
     cucc();
-    pontozas();
+    // pontozas();
 
 }
 
 Main();
+
+
+    // kepekBerakasa
+
+    // for (let i = 0; i < cellak.length; i++) {
+    //     if (cellak[i].kartyae === true) {
+    //         var temphely = document.getElementById(i+31);
+    //         var img = document.createElement("img");
+    //         img.src = "img/" + cellak[i].kartya.id + ".png";
+    //         img.width = "10px";
+    //         img.height = "10px";
+    //         temphely.appendChild(img);
+    //     }
+    //     else{
+    //         var temphely = document.getElementById(i+31);
+    //         var img = document.createElement("img");
+    //         img.src = "tornyok/" + cellak[i].kartya.id + ".png";
+    //         temphely.appendChild(img);
+    //     }
+    // }
