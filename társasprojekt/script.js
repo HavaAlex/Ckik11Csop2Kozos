@@ -6,6 +6,7 @@ var pontokBox = document.createElement("div");
 var tabla = document.createElement("div");
 var korokBox = document.createElement("div");
 var TempKartya = document.createElement("div");
+var kivalaszt = document.createElement("div");
 
 var kartyak=[
     {id:1,value:-3,sign:''},
@@ -63,12 +64,13 @@ function JatekterBetoltes()
     jatekTer.appendChild(tabla);
     jatekTer.appendChild(korokBox);
     document.body.appendChild(TempKartya);
+    kivalaszt.classList += "kivalaszt";
+    TempKartya.appendChild(kivalaszt)
 
     kartyaBox.innerHTML = "kartyaBox";
     pontokBox.innerHTML = "pontokBox";
     tabla.innerHTML = "tabla";
     korokBox.innerHTML = "korokBox";
-    TempKartya.innerHTML = "TempKartya";
 }
 function JatekterElrendezes()
 {
@@ -141,15 +143,15 @@ function cellakFeltoltese(){
         {
             var randomkep = Math.floor(Math.random()*16)+1;
         }
+        hasznalttornyok.push(randomkep);
         cellak[randomhely-1].kartyae=false;
         cellak[randomhely-1].kartya=tornyok[randomkep-1]; 
         
     }
-    console.log(hasznalttornyok)
 }
 
 function pontozas(){
-    
+    console.log("Még nem jó de itt a pontozás")
     for (let sor = 0; sor < 30; sor+=6) {
         var pont = 0;
         for (let oszlop = sor; oszlop < sor+6; oszlop++){
@@ -195,15 +197,21 @@ function KepKirako(div){
     var temp = cellak[div.id-31];
     console.log(temp.id);
     console.log(temp);
+    console.log(kivalaszt.querySelector("img"));
+    if (!(kivalaszt.querySelector("img")===null)) {
+        var regikep = kivalaszt.querySelector("img");
+        kivalaszt.removeChild(regikep)
+    }
+
         if (temp.kartyae === true) {
             var img = document.createElement("img");
             img.src = "img/" + temp.kartya.id + ".png";
-            TempKartya.appendChild(img);
+            kivalaszt.appendChild(img);
         }
         else{
             var img = document.createElement("img");
             img.src = "tornyok/" + temp.kartya.id + ".png";
-            TempKartya.appendChild(img);
+            kivalaszt.appendChild(img);
         }
 }
 
@@ -232,6 +240,9 @@ function cellaRanyom(div){
         
     }
     ranyom = false
+    if (gomb.id == 61) {
+        pontozas();
+    }
 
 }
 
