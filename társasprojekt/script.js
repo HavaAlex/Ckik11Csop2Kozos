@@ -103,21 +103,19 @@ function TablaGeneralas()
 
 }
 
+
+var pakli = [];
 function cellakFeltoltese(){
 
     var hasznaltkepek = [];
     var hasznalthelyek = [];
-    var hasznalttornyok = [];
-
-
-
     for (let index = 0; index < 23; index++)
     {
         
-        var randomhely = Math.floor(Math.random()*30)+1;
+        var randomhely = Math.floor(Math.random()*23)+1;
         while(hasznalthelyek.includes(randomhely))
         {
-            var randomhely = Math.floor(Math.random()*30)+1;
+            var randomhely = Math.floor(Math.random()*23)+1;
         }
         hasznalthelyek.push(randomhely);
 
@@ -127,27 +125,9 @@ function cellakFeltoltese(){
             var randomkep = Math.floor(Math.random()*23)+1;
         }
         hasznaltkepek.push(randomkep);
-        cellak[randomhely-1].kartyae=true;
-        cellak[randomhely-1].kartya=kartyak[randomkep-1]; 
+        pakli[randomhely-1]=kartyak[randomkep-1]; 
     }
-    for (let index = 0; index < 7; index++) {
-        var randomhely = Math.floor(Math.random()*30)+1;
-        while(hasznalthelyek.includes(randomhely))
-        {
-            var randomhely = Math.floor(Math.random()*30)+1;
-        }
-        hasznalthelyek.push(randomhely);
-
-        var randomkep = Math.floor(Math.random()*16)+1;
-        while(hasznalttornyok.includes(randomkep))
-        {
-            var randomkep = Math.floor(Math.random()*16)+1;
-        }
-        hasznalttornyok.push(randomkep);
-        cellak[randomhely-1].kartyae=false;
-        cellak[randomhely-1].kartya=tornyok[randomkep-1]; 
-        
-    }
+    console.log(pakli)
 }
 
 function pontozas(){
@@ -173,7 +153,7 @@ function pontozas(){
 
 }
 
-function cucc(){
+function GombKirakasa(){
     var gomb = document.createElement("input");
     gomb.style.display ="block"
     gomb.type = "button";
@@ -186,11 +166,23 @@ function cucc(){
     kartyaBox.appendChild(gomb);
 }
 
+
+// !!!! A rányom simán jelentése: Már kiválasztottuk mit fogunk csinálni, csak egy cellára lehet nyomni
 var ranyom = false
+
+
+// !!!! A rányom pakli jelentése: Már huztunk egy kártyát, csak lerakni tudjuk
+var ranyomPakli = false;
+
+
+// !!!! A rányom vár jelentése: Már kiválasztottunk egy várat, csak lerakni tudjuk
+var ranyomVar = false;
+
 
 var gomb;
 function KepKirako(div){
-    ranyom = true
+    ranyom = true;
+    ranyomPakli = true;
     gomb = div;
     gomb.setAttribute("onclick","");
     console.log(div.id)
@@ -202,38 +194,33 @@ function KepKirako(div){
         var regikep = kivalaszt.querySelector("img");
         kivalaszt.removeChild(regikep)
     }
-
-        if (temp.kartyae === true) {
-            var img = document.createElement("img");
-            img.src = "img/" + temp.kartya.id + ".png";
-            kivalaszt.appendChild(img);
-        }
-        else{
-            var img = document.createElement("img");
-            img.src = "tornyok/" + temp.kartya.id + ".png";
-            kivalaszt.appendChild(img);
-        }
+    var img = document.createElement("img");
+    img.src = "img/" + pakli[gomb.id - 31].id + ".png";
+    kivalaszt.appendChild(img);
 }
+
+
 
 function cellaRanyom(div){
     console.log(ranyom);
-    if (ranyom == true)  {
-        var cella = div
-        console.log(cellak[gomb.id-31].id);
-        console.log(cella.id)
-        console.log("van kep");
-        console.log(cellak[gomb.id-31].id);
-        if (cellak[gomb.id-31].kartyae==true) {
+    console.log(ranyomPakli);
+    console.log(ranyomVar);
+
+    if (ranyom == true){
+
+        if (ranyomPakli) {
+            console.log(gomb.id - 31);
+            console.log (pakli[gomb.id - 31].id)
             var img = document.createElement("img");
-            img.src = "img/" + cellak[gomb.id-31].kartya.id + ".png";
-            cella.appendChild(img);
+            img.src = "img/" + pakli[gomb.id - 31].id + ".png";
+            div.appendChild(img);
+            cellak[div.id-1] = kartyak[pakli[gomb.id-31].id-1]
         }
-        else{
-            var img = document.createElement("img");
-            img.src = "tornyok/" + cellak[gomb.id-31].kartya.id + ".png";
-            cella.appendChild(img);
+        else if (ranyomVar){
+
         }
-        cella.setAttribute("onclick","")
+        console.log(cellak);
+        div.setAttribute("onclick","")
 
         gomb.id++;
         gomb.setAttribute("onclick","KepKirako(this)");
@@ -254,29 +241,9 @@ function Main()
     TablaGeneralas();
     cellakFeltoltese();
     console.log(cellak)
-    cucc();
+    GombKirakasa();
     // pontozas();
 
 }
 
 Main();
-
-
-    // kepekBerakasa
-
-    // for (let i = 0; i < cellak.length; i++) {
-    //     if (cellak[i].kartyae === true) {
-    //         var temphely = document.getElementById(i+31);
-    //         var img = document.createElement("img");
-    //         img.src = "img/" + cellak[i].kartya.id + ".png";
-    //         img.width = "10px";
-    //         img.height = "10px";
-    //         temphely.appendChild(img);
-    //     }
-    //     else{
-    //         var temphely = document.getElementById(i+31);
-    //         var img = document.createElement("img");
-    //         img.src = "tornyok/" + cellak[i].kartya.id + ".png";
-    //         temphely.appendChild(img);
-    //     }
-    // }
