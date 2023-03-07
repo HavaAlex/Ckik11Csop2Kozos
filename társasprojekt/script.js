@@ -67,9 +67,18 @@ function JatekterBetoltes()
     kivalaszt.classList += "kivalaszt";
     TempKartya.appendChild(kivalaszt)
 
-    kartyaBox.innerHTML = "kartyaBox";
-    pontokBox.innerHTML = "pontokBox";
-    tabla.innerHTML = "tabla";
+    let kartyabox = document.createElement("div")
+    kartyabox.innerHTML='Pakli';
+    kartyaBox.appendChild(kartyabox);
+
+
+    let pontokbox = document.createElement("div")
+    pontokbox.innerHTML='Érmék';
+    pontokBox.appendChild(pontokbox);
+
+
+    // pontokBox.innerHTML = "pontokBox";
+    // tabla.innerHTML = "tabla";
     korokBox.innerHTML = "korokBox";
 }
 function JatekterElrendezes()
@@ -155,11 +164,9 @@ function pontozas(){
 
 function GombKirakasa(){
     var gomb = document.createElement("input");
-    gomb.style.display ="block"
+    // gomb.style.display ="block"
     gomb.type = "button";
     gomb.value = "Kártya felhuzása";
-    gomb.style.marginTop="10vw";
-    gomb.style.marginLeft="9vw";
     gomb.className="gomb";
     gomb.id=31;
     gomb.setAttribute("onclick","KepKirako(this)");
@@ -177,6 +184,10 @@ var ranyomPakli = false;
 
 // !!!! A rányom vár jelentése: Már kiválasztottunk egy várat, csak lerakni tudjuk
 var ranyomVar = false;
+
+
+// !!!! A rányom vár jelentése: Már kiválasztottunk a felhuzott kartyat, csak lerakni tudjuk
+var ranyomFelhuzott = false;
 
 
 var gomb;
@@ -224,11 +235,13 @@ function cellaRanyom(div){
 
         gomb.id++;
         gomb.setAttribute("onclick","KepKirako(this)");
-        
     }
     ranyom = false
-    if (gomb.id == 61) {
-        pontozas();
+     if (gomb.id == 54) { //54
+        gomb.disabled=true;
+        gomb.value = "Kifogyott a pakli";
+        gomb.style.background = "grey"
+        
     }
 
 }
