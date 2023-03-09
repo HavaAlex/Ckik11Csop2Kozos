@@ -1,12 +1,17 @@
 var jatekTer = document.getElementById("jatekter");
-
 var balPanel = document.createElement("div");
+var jobbPanel = document.createElement("div");
+var kartyakDiv = document.createElement("div");
 var kartyaBox = document.createElement("div");
 var pontokBox = document.createElement("div");
 var tabla = document.createElement("div");
 var korokBox = document.createElement("div");
 var TempKartya = document.createElement("div");
 var kivalaszt = document.createElement("div");
+var felhuzottKartya = document.createElement("div");
+
+var gomb;
+var kor = 1; // Hanyadik körben van a játék
 
 var kartyak=[
     {id:1,value:-3,sign:''},
@@ -56,31 +61,60 @@ var tornyok = [
 var cellak = [
 ];
 
+
+
+
 function JatekterBetoltes()
-{
+{   
+    /* -------------------------------- balPanel gen -------------------------------- */
+    jatekTer.appendChild(balPanel);
     balPanel.appendChild(kartyaBox);
     balPanel.appendChild(pontokBox);
-    jatekTer.appendChild(balPanel);
+    let kartyabox = document.createElement("div")
+    kartyabox.innerHTML='<h2>Pakli</h2>';
+    kartyaBox.appendChild(kartyabox);
+    let pontokbox = document.createElement("div")
+    pontokbox.innerHTML='<h2>Érmék</h2>';
+    pontokBox.appendChild(pontokbox);
+
+    /* -------------------------- Tábla gen ------------------------- */
     jatekTer.appendChild(tabla);
-    jatekTer.appendChild(korokBox);
-    document.body.appendChild(TempKartya);
+    
+    /* -------------------------------- jobbPanel gen ------------------------------- */
+    jatekTer.appendChild(jobbPanel);
+
+
+    /* ------------------------------------ KorokBox gen ----------------------------------- */
+
+    korokBox.className = "korok";
+    korokBox.innerHTML = "<h2>Kör száma</h2>";
+    let temp = kor;
+    let korok = `${temp}. Kör!`;
+    korokBox.innerHTML += korok;
+    
+    
+    jobbPanel.appendChild(korokBox);
+
+    /* --------------------------- felhuzottKartya gen -------------------------- */
+
+    kartyakDiv.appendChild(TempKartya);
+    kartyakDiv.appendChild(felhuzottKartya)
+
     kivalaszt.classList += "kivalaszt";
     TempKartya.appendChild(kivalaszt)
 
-    let kartyabox = document.createElement("div")
-    kartyabox.innerHTML='Pakli';
-    kartyaBox.appendChild(kartyabox);
+    felhuzottKartya.id = "felhuzottKartya"
+    let tempFelhuzott = document.createElement("div");
+    tempFelhuzott.className = "felhuzott"
+    felhuzottKartya.appendChild(tempFelhuzott);
+    
+    
 
+    kartyakDiv.id = "kartyakDiv";
+    jobbPanel.appendChild(kartyakDiv);
 
-    let pontokbox = document.createElement("div")
-    pontokbox.innerHTML='Érmék';
-    pontokBox.appendChild(pontokbox);
-
-
-    // pontokBox.innerHTML = "pontokBox";
-    // tabla.innerHTML = "tabla";
-    korokBox.innerHTML = "korokBox";
 }
+
 function JatekterElrendezes()
 {
     balPanel.id = "balpanel";
@@ -190,7 +224,6 @@ var ranyomVar = false;
 var ranyomFelhuzott = false;
 
 
-var gomb;
 function KepKirako(div){
     ranyom = true;
     ranyomPakli = true;
@@ -245,6 +278,9 @@ function cellaRanyom(div){
     }
 
 }
+
+
+
 
 
 function Main()

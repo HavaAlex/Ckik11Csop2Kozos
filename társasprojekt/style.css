@@ -8,7 +8,6 @@
 
 body{
     background-color: var(--hatter);
-    text-shadow: cm;
 }
 #jatekter{
     width: 100%;
@@ -19,7 +18,7 @@ body{
     height: 200%;
 }
 #balpanel{
-    width: 28%;
+    width: 30%;
     border-radius: 5px;
     /* border: 1px solid orange; */
     height: 38vw;
@@ -90,7 +89,7 @@ body{
     height: 15vw;
 }
 .sordiv{
-    border-radius: 5px;
+    border-radius: 2px;
     border: 1px solid black;
     display: flex;
     flex-direction: row;
@@ -128,13 +127,13 @@ img{
   }
   
 .gomb:hover {
-    background-color: gray;
+    background-color: goldenrod;
     color: black;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
     cursor: pointer;
   }
   
-  .gomb:active {
+.gomb:active {
     background-color: greenyellow;
     border-color: green;
     color: black;
@@ -142,23 +141,18 @@ img{
   }
 
 
-
-.kivalaszt{
+.kivalaszt, .felhuzott {
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    border: 3px solid rgb(0, 233, 66);
-    height: 15vw;
-    width: 15vw;
-    margin: 5px;
+    border: 2px solid rgb(0, 27, 233);
+    height: 11vw;
+    width: 45%;
+    margin: 8px;
+    float: left;
 }
 
-.TempKartya{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.korok p{
+    color: wheat;
 }
-
-  
