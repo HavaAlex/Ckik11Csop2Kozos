@@ -342,7 +342,21 @@ function cellaRanyom(div){
 
 
 
-
+function ermeSzamolas(szam){
+    const ermek = [100, 50, 10, 5, 1];
+    const ermekVege = {};
+    var maradek = szam;
+  
+    for (let i = 0; i < ermek.length; i++) {
+      const ermeErtek = ermek[i];
+      const menyi = Math.floor(maradek / ermeErtek);
+      if (menyi > 0) {
+        ermekVege[ermeErtek] = menyi;
+        maradek -= ermeErtek * menyi;
+      }
+    }       
+    console.log(ermekVege);
+}
 
 
 
