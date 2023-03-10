@@ -106,6 +106,7 @@ function JatekterBetoltes()
     felhuzottKartya.id = "felhuzottKartya"
     let tempFelhuzott = document.createElement("div");
     tempFelhuzott.className = "felhuzott"
+    tempFelhuzott.setAttribute("onclick","felhuzottLerak(this)")
     felhuzottKartya.appendChild(tempFelhuzott);
     
     
@@ -138,6 +139,8 @@ function TablaGeneralas()
             oszlopDiv.id = k;
             oszlopDiv.setAttribute("onclick","cellaRanyom(this)")
             cellak.push({id:k})
+            oszlopDiv.dataset.sor=i+1;
+            oszlopDiv.dataset.oszlop = j+1;
             k++;
             sorDiv.appendChild(oszlopDiv);
         }
@@ -148,7 +151,7 @@ function TablaGeneralas()
 
 
 var pakli = [];
-function cellakFeltoltese(){
+function pakliFeltoltese(){
 
     var hasznaltkepek = [];
     var hasznalthelyek = [];
@@ -196,7 +199,7 @@ function pontozas(){
 
 }
 
-function GombKirakasa(){
+function GombKirakasaFelhuzzotKirak(){
     var gomb = document.createElement("input");
     // gomb.style.display ="block"
     gomb.type = "button";
@@ -205,11 +208,17 @@ function GombKirakasa(){
     gomb.id=31;
     gomb.setAttribute("onclick","KepKirako(this)");
     kartyaBox.appendChild(gomb);
+
+    var img = document.createElement("img");
+    img.src = "img/" + pakli[gomb.id - 31].id + ".png";
+    var temp = document.getElementsByClassName("felhuzott")[0];
+    temp.appendChild(img);
+
 }
 
 
 // !!!! A rányom simán jelentése: Már kiválasztottuk mit fogunk csinálni, csak egy cellára lehet nyomni
-var ranyom = false
+var ranyom = false;
 
 
 // !!!! A rányom pakli jelentése: Már huztunk egy kártyát, csak lerakni tudjuk
@@ -225,59 +234,116 @@ var ranyomFelhuzott = false;
 
 
 function KepKirako(div){
-    ranyom = true;
-    ranyomPakli = true;
-    gomb = div;
-    gomb.setAttribute("onclick","");
-    console.log(div.id)
-    var temp = cellak[div.id-31];
-    console.log(temp.id);
-    console.log(temp);
-    console.log(kivalaszt.querySelector("img"));
+    if (!ranyom) {
+        ranyom = true;
+        ranyomPakli = true;
+        gomb = div;
+        gomb.setAttribute("onclick","");
+        console.log(div.id)
+        var temp = cellak[div.id-31];
+        console.log(temp.id);
+        console.log(temp);
+        console.log(kivalaszt.querySelector("img"));
+        var img = document.createElement("img");
+        img.src = "img/" + pakli[gomb.id - 30].id + ".png";
+        kivalaszt.appendChild(img);
+    }
+
+}
+
+function pakliLerak(div){
+    console.log(gomb.id - 31);
+    console.log (pakli[gomb.id - 31].id)
+    var img = document.createElement("img");
+    img.src = "img/" + pakli[gomb.id - 30].id + ".png";
+    div.appendChild(img);
+    cellak[div.id-1] = kartyak[pakli[gomb.id-30].id-1]
+    div.dataset.vanbenne=true;
+    cellak[div.id-1].kartyae =true;
+
+    div.setAttribute("onclick","")
+    gomb.id++;
+    gomb.setAttribute("onclick","KepKirako(this)");
+
     if (!(kivalaszt.querySelector("img")===null)) {
         var regikep = kivalaszt.querySelector("img");
         kivalaszt.removeChild(regikep)
     }
-    var img = document.createElement("img");
-    img.src = "img/" + pakli[gomb.id - 31].id + ".png";
-    kivalaszt.appendChild(img);
 }
+
+function felhuzottLerak(div){
+    ranyomFelhuzott = true;
+    ranyom = true;
+
+}
+
 
 
 
 function cellaRanyom(div){
-    console.log(ranyom);
-    console.log(ranyomPakli);
-    console.log(ranyomVar);
-
-    if (ranyom == true){
-
-        if (ranyomPakli) {
-            console.log(gomb.id - 31);
-            console.log (pakli[gomb.id - 31].id)
-            var img = document.createElement("img");
-            img.src = "img/" + pakli[gomb.id - 31].id + ".png";
-            div.appendChild(img);
-            cellak[div.id-1] = kartyak[pakli[gomb.id-31].id-1]
-        }
-        else if (ranyomVar){
-
-        }
-        console.log(cellak);
-        div.setAttribute("onclick","")
-
-        gomb.id++;
-        gomb.setAttribute("onclick","KepKirako(this)");
+    
+    console.log(ranyom)
+    console.log(ranyomFelhuzott)
+    console.log(ranyomPakli)
+    if (ranyom == false){
+        return;
     }
+    else if(ranyom){
+        if (ranyomPakli) {
+            pakliLerak(div);
+            console.log(cellak)
+        }
+        else if(ranyomFelhuzott){
+
+            let temp = document.getElementsByClassName("felhuzott")[0];
+            console.log(document.getElementsByClassName("felhuzott")[0].querySelector("img"));
+            if (!(temp.querySelector("img")===null)) {
+                var regikep = temp.querySelector("img");
+                temp.removeChild(regikep)
+            }    
+            var img = document.createElement("img");
+            img.src = "img/" + pakli[0].id + ".png";
+            div.appendChild(img);
+
+            cellak[div.id-1] = kartyak[pakli[0].id-1]
+            div.dataset.vanbenne=true;
+            cellak[div.id-1].kartyae =true;
+
+        }
+        else if(ranyomVar) {
+            
+        }
+
+    /* ------------ gomb visszarakása, készülödés a következö lépésre ----------- */
+
+
+
+
+    /* ---------------------------- mindent nullázunk --------------------------- */
     ranyom = false
-     if (gomb.id == 54) { //54
+    ranyomPakli = false;
+    ranyomVar = false;
+    ranyomFelhuzott = false;
+
+
+    /* ----------------------- van e még a pakliban kártya check ---------------------- */
+    ranyom = false
+     if (gomb.id == 53) { //53
         gomb.disabled=true;
         gomb.value = "Kifogyott a pakli";
-        gomb.style.background = "grey"
         
     }
 
+    /*! ------------------------------------ Meg kell nézni hogy tele van e a cellák ----------------------------------- */
+
+
+    }
 }
+
+
+
+
+
 
 
 
@@ -288,9 +354,9 @@ function Main()
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
-    cellakFeltoltese();
-    console.log(cellak)
-    GombKirakasa();
+    pakliFeltoltese();
+    // console.log(cellak)
+    GombKirakasaFelhuzzotKirak();
     // pontozas();
 
 }

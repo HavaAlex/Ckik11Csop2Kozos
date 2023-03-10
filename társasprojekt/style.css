@@ -139,6 +139,9 @@ img{
     color: black;
     box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
+  .gomb:disabled {
+    background-color: grey;
+  }
 
 
 .kivalaszt, .felhuzott {
