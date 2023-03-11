@@ -1,68 +1,86 @@
-var jatekTer = document.getElementById("jatekter");
-var balPanel = document.createElement("div");
-var jobbPanel = document.createElement("div");
-var kartyakDiv = document.createElement("div");
-var kartyaBox = document.createElement("div");
-var pontokBox = document.createElement("div");
-var tabla = document.createElement("div");
-var korokBox = document.createElement("div");
-var TempKartya = document.createElement("div");
-var kivalaszt = document.createElement("div");
-var felhuzottKartya = document.createElement("div");
-var varak = document.createElement("div");
+
+var jatekTer;
+var balPanel;
+var jobbPanel;
+var kartyakDiv;
+var kartyaBox;
+var pontokBox;
+var tabla;
+var korokBox;
+var TempKartya;
+var kivalaszt;
+var felhuzottKartya;
+var varak;
 
 var gomb;
 var kor = 1; // Hanyadik körben van a játék
 
-var kartyak=[
-    {id:1,value:-3,sign:''},
-    {id:2,value:2,sign:''},
-    {id:3,value:5,sign:''},
-    {id:4,value:4,sign:''},
-    {id:5,value:3,sign:''},
-    {id:6,value:0,sign:'pap'},
-    {id:7,value:-6,sign:''},
-    {id:8,value:6,sign:''},
-    {id:9,value:0,sign:'taliga'},
-    {id:10,value:0,sign:'hegy'},
-    {id:11,value:-5,sign:''},
-    {id:12,value:4,sign:''},
-    {id:13,value:0,sign:'sarkany'},
-    {id:14,value:5,sign:''},
-    {id:15,value:6,sign:''},
-    {id:16,value:-4,sign:''},
-    {id:17,value:1,sign:''},
-    {id:18,value:-1,sign:''},
-    {id:19,value:-2,sign:''},
-    {id:20,value:3,sign:''},
-    {id:21,value:2,sign:''},
-    {id:22,value:0,sign:'hegy'},
-    {id:23,value:1,sign:''}
-  ]
+var kartyak;
+var tornyok;
 
-var tornyok = [
-    {id:1, value:1},
-    {id:2, value:2},
-    {id:3, value:3},
-    {id:4, value:4},
-    {id:5, value:1},
-    {id:6, value:2},
-    {id:7, value:3},
-    {id:8, value:4},
-    {id:9, value:1},
-    {id:10,value:2},
-    {id:11,value:3},
-    {id:12,value:4},
-    {id:13,value:1},
-    {id:14,value:2},
-    {id:15,value:3},
-    {id:16,value:4}
-]
-
-var cellak = [
-];
+var cellak;
 
 
+
+function alapok(){
+    var jatekter = document.createElement("div");
+    jatekter.id = "jatekter";
+    document.body.appendChild(jatekter);
+
+
+
+    jatekTer = document.getElementById("jatekter");
+    balPanel = document.createElement("div");
+    jobbPanel = document.createElement("div");
+    kartyakDiv = document.createElement("div");
+    kartyaBox = document.createElement("div");
+    pontokBox = document.createElement("div");
+    tabla = document.createElement("div");
+    korokBox = document.createElement("div");
+    TempKartya = document.createElement("div");
+    kivalaszt = document.createElement("div");
+    felhuzottKartya = document.createElement("div");
+    varak = document.createElement("div");
+
+    gomb;
+    kor = 1; // Hanyadik körben van a játék
+
+    kartyak=[
+        {id:1,value:-3,sign:''},
+        {id:2,value:2,sign:''},
+        {id:3,value:5,sign:''},
+        {id:4,value:4,sign:''},
+        {id:5,value:3,sign:''},
+        {id:6,value:0,sign:'pap'},
+        {id:7,value:-6,sign:''},
+        {id:8,value:6,sign:''},
+        {id:9,value:0,sign:'taliga'},
+        {id:10,value:0,sign:'hegy'},
+        {id:11,value:-5,sign:''},
+        {id:12,value:4,sign:''},
+        {id:13,value:0,sign:'sarkany'},
+        {id:14,value:5,sign:''},
+        {id:15,value:6,sign:''},
+        {id:16,value:-4,sign:''},
+        {id:17,value:1,sign:''},
+        {id:18,value:-1,sign:''},
+        {id:19,value:-2,sign:''},
+        {id:20,value:3,sign:''},
+        {id:21,value:2,sign:''},
+        {id:22,value:0,sign:'hegy'},
+        {id:23,value:1,sign:''}
+    ]
+
+    tornyok = [
+        {id:1, value:1},
+        {id:2, value:2},
+        {id:3, value:3},
+        {id:4, value:4},
+    ]
+
+    cellak = [
+    ];
+}
 
 
 function JatekterBetoltes()
@@ -340,6 +358,7 @@ function cellaRanyom(div){
             div.dataset.vanbenne=true;
             cellak[div.id-1].kartyae =true;
 
+
         }
         else if(ranyomVar) {
             
@@ -366,12 +385,24 @@ function cellaRanyom(div){
 
     /*! ------------------------------------ Meg kell nézni hogy tele van e a cellák ----------------------------------- */
 
+    if (teleACella == true) {
+        document.body.innerHTML = "";
+        Main();
+        kor++;
 
+    }
 
     }
 }
 
 
+function teleACella(){
+    /* ------------------------------------ Végig kell menni a cellán hogy van e minedegyiknek a data-vanbenne = true  ----------------------------------- */
+
+    return false;
+}
+
+var pontszam = 50;
 
 function ermeSzamolas(szam){
     const ermek = [100, 50, 10, 5, 1];
@@ -396,6 +427,8 @@ function ermeSzamolas(szam){
 
 function Main()
 {
+    alapok();
+    document.body.appendChild(jatekter);
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
