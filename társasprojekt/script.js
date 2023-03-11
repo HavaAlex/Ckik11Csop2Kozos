@@ -9,6 +9,7 @@ var korokBox = document.createElement("div");
 var TempKartya = document.createElement("div");
 var kivalaszt = document.createElement("div");
 var felhuzottKartya = document.createElement("div");
+var varak = document.createElement("div");
 
 var gomb;
 var kor = 1; // Hanyadik körben van a játék
@@ -149,6 +150,44 @@ function TablaGeneralas()
 
 }
 
+function varTablaGeneralas()
+{
+    let az = 1;
+    var sorDiv = document.createElement("div");
+    sorDiv.classList += "v-sordiv";
+    for(var j = 0; j<10;j++)
+    {
+        var oszlopDiv = document.createElement("div");
+        oszlopDiv.classList += "v-oszlopdiv";
+        oszlopDiv.setAttribute("onclick","varLerak(this)")
+        oszlopDiv.dataset.az=az;
+        sorDiv.appendChild(oszlopDiv);
+        az++;
+    }
+    document.body.appendChild(sorDiv);
+
+    for (let index = 0; index < 10; index++) {
+        if (index < 4) {
+            var div = document.querySelectorAll(`[data-az="${index + 1}"]`)[0];
+            div.textContent="teszt"
+        }
+        else if (index < 7) {
+            var div = document.querySelectorAll(`[data-az="${index + 1}"]`)[0];
+            div.textContent="teszt2"
+        }
+        else if (index < 9) {
+            var div = document.querySelectorAll(`[data-az="${index + 1}"]`)[0];
+            div.textContent="teszt3"
+        }
+        else if (index < 10) {
+            var div = document.querySelectorAll(`[data-az="${index + 1}"]`)[0];
+            div.textContent="teszt4"
+        }
+
+    }
+
+}
+
 
 var pakli = [];
 function pakliFeltoltese(){
@@ -177,25 +216,7 @@ function pakliFeltoltese(){
 }
 
 function pontozas(){
-    console.log("Még nem jó de itt a pontozás")
-    for (let sor = 0; sor < 30; sor+=6) {
-        var pont = 0;
-        for (let oszlop = sor; oszlop < sor+6; oszlop++){
-            if(cellak[oszlop].kartyae==true){
-                pont += cellak[oszlop].kartya.value;
-            }
-        }
-        console.log(pont);
-    }
-    for (let sor = 0; sor < 6; sor++) {
-        var pont = 0;
-        for (let oszlop = sor; oszlop < 30; oszlop+=6){
-            if(cellak[oszlop].kartyae==true){
-                pont += cellak[oszlop].kartya.value;
-            }
-        }
-        console.log(pont);
-    }
+
 
 }
 
@@ -274,7 +295,16 @@ function pakliLerak(div){
 function felhuzottLerak(div){
     ranyomFelhuzott = true;
     ranyom = true;
+}
 
+
+/* ------------- Kell ahoz hogy tudjuk melyik várat választottuk ------------ */
+var varSzam;
+
+function varLerak(div) {
+    ranyom = true;
+    ranyomVar = true;
+    varSzam = div.az
 }
 
 
@@ -285,6 +315,7 @@ function cellaRanyom(div){
     console.log(ranyom)
     console.log(ranyomFelhuzott)
     console.log(ranyomPakli)
+    console.log(ranyomVar)
     if (ranyom == false){
         return;
     }
@@ -313,7 +344,7 @@ function cellaRanyom(div){
         else if(ranyomVar) {
             
         }
-
+        
     /* ------------ gomb visszarakása, készülödés a következö lépésre ----------- */
 
 
@@ -327,7 +358,6 @@ function cellaRanyom(div){
 
 
     /* ----------------------- van e még a pakliban kártya check ---------------------- */
-    ranyom = false
      if (gomb.id == 53) { //53
         gomb.disabled=true;
         gomb.value = "Kifogyott a pakli";
@@ -335,6 +365,7 @@ function cellaRanyom(div){
     }
 
     /*! ------------------------------------ Meg kell nézni hogy tele van e a cellák ----------------------------------- */
+
 
 
     }
@@ -368,6 +399,7 @@ function Main()
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
+    varTablaGeneralas();
     pakliFeltoltese();
     // console.log(cellak)
     GombKirakasaFelhuzzotKirak();
