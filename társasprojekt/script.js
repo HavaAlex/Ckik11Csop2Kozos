@@ -187,19 +187,29 @@ function varTablaGeneralas()
     for (let index = 0; index < 10; index++) {
         if (index < 4) {
             var div = document.querySelectorAll(`[data-az="${index + 1}"]`)[0];
-            div.textContent="teszt"
+            var img = document.createElement("img")
+            img.src = "tornyok/1.png"
+            div.appendChild(img);
+
         }
         else if (index < 7) {
             var div = document.querySelectorAll(`[data-az="${index + 1}"]`)[0];
-            div.textContent="teszt2"
+            var img = document.createElement("img");
+            img.src = "tornyok/2.png"
+
+            div.appendChild(img);
         }
         else if (index < 9) {
             var div = document.querySelectorAll(`[data-az="${index + 1}"]`)[0];
-            div.textContent="teszt3"
+            var img = document.createElement("img");
+            img.src = "tornyok/3.png";
+            div.appendChild(img);
         }
         else if (index < 10) {
             var div = document.querySelectorAll(`[data-az="${index + 1}"]`)[0];
-            div.textContent="teszt4"
+            var img = document.createElement("img");
+            img.src = "tornyok/4.png";
+            div.appendChild(img);
         }
 
     }
@@ -234,8 +244,9 @@ function pakliFeltoltese(){
 }
 
 function pontozas(){
-
-
+    sarkany();
+    banya();
+    pap();
 }
 
 function GombKirakasaFelhuzzotKirak(){
@@ -322,7 +333,7 @@ var varSzam;
 function varLerak(div) {
     ranyom = true;
     ranyomVar = true;
-    varSzam = div.az
+    varSzam = div.dataset.az;
 }
 
 
@@ -341,6 +352,11 @@ function cellaRanyom(div){
         if (ranyomPakli) {
             pakliLerak(div);
             console.log(cellak)
+            if (gomb.id == 53) { //53
+                gomb.disabled=true;
+                gomb.value = "Kifogyott a pakli";
+                
+            }
         }
         else if(ranyomFelhuzott){
 
@@ -361,7 +377,31 @@ function cellaRanyom(div){
 
         }
         else if(ranyomVar) {
-            
+            var vardiv = document.querySelectorAll(`[data-az="${varSzam}"]`)[0];
+            console.log(vardiv);
+            document.createElement(img);
+            var img = document.createElement("img");
+            console.log(varSzam)
+            if (varSzam <= 4) {
+                img.src = "tornyok/1.png";
+                cellak[div.id-1] = tornyok[0];
+            }
+            else if (varSzam <= 7) {
+                img.src = "tornyok/2.png"
+                cellak[div.id-1] = tornyok[1];
+            }
+            else if (varSzam <= 9) {
+                img.src = "tornyok/3.png"
+                cellak[div.id-1] = tornyok[2];
+            }
+            else if (varSzam = 10) {
+                img.src = "tornyok/4.png"
+                cellak[div.id-1]= tornyok[3];
+            }
+            console.log(img);
+            div.appendChild(img);
+            vardiv.setAttribute("onclick","")
+            cellak[div.id-1].kartyae = false;
         }
         
     /* ------------ gomb visszarakása, készülödés a következö lépésre ----------- */
@@ -377,19 +417,21 @@ function cellaRanyom(div){
 
 
     /* ----------------------- van e még a pakliban kártya check ---------------------- */
-     if (gomb.id == 53) { //53
-        gomb.disabled=true;
-        gomb.value = "Kifogyott a pakli";
-        
-    }
+
 
     /*! ------------------------------------ Meg kell nézni hogy tele van e a cellák ----------------------------------- */
 
     if (teleACella == true) {
+        pontozas();
         document.body.innerHTML = "";
         Main();
         kor++;
 
+
+        ranyom = false;
+        ranyomPakli = false;
+        ranyomVar = false;
+        ranyomFelhuzott = false;
     }
 
     }
@@ -434,9 +476,8 @@ function Main()
     TablaGeneralas();
     varTablaGeneralas();
     pakliFeltoltese();
-    // console.log(cellak)
     GombKirakasaFelhuzzotKirak();
-    // pontozas();
+    ermeSzamolas(588);
 
 }
 
