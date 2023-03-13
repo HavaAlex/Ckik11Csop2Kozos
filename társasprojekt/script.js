@@ -13,7 +13,7 @@ var felhuzottKartya;
 var varak;
 
 var gomb;
-var kor = 1; // Hanyadik körben van a játék
+var kor = 0; // Hanyadik körben van a játék
 
 var kartyak;
 var tornyok;
@@ -43,7 +43,8 @@ function alapok(){
     varak = document.createElement("div");
 
     gomb;
-    kor = 1; // Hanyadik körben van a játék
+    kor++; // Hanyadik körben van a játék
+    k = 1;
 
     kartyak=[
         {id:1,value:-3,sign:''},
@@ -144,7 +145,7 @@ function JatekterElrendezes()
     korokBox.id = "korokbox";
     TempKartya.id ="TempKartya"
 }
-var k = 1;
+var k;
 function TablaGeneralas()
 {
     for(var i = 0; i < 5; i++)
@@ -157,7 +158,7 @@ function TablaGeneralas()
             oszlopDiv.classList += " oszlopdiv";
             oszlopDiv.id = k;
             oszlopDiv.setAttribute("onclick","cellaRanyom(this)")
-            cellak.push({id:k})
+            cellak.push({hely:k})
             oszlopDiv.dataset.sor=i+1;
             oszlopDiv.dataset.oszlop = j+1;
             k++;
@@ -263,7 +264,7 @@ function GombKirakasaFelhuzzotKirak(){
     img.src = "img/" + pakli[gomb.id - 31].id + ".png";
     var temp = document.getElementsByClassName("felhuzott")[0];
     temp.appendChild(img);
-
+    
 }
 
 
@@ -283,14 +284,14 @@ var ranyomVar = false;
 var ranyomFelhuzott = false;
 
 
-function KepKirako(div){
+function KepKirako(tempGomb){
     if (!ranyom) {
         ranyom = true;
         ranyomPakli = true;
-        gomb = div;
+        gomb = tempGomb;
         gomb.setAttribute("onclick","");
-        console.log(div.id)
-        var temp = cellak[div.id-31];
+        console.log(tempGomb.id)
+        var temp = cellak[tempGomb.id-31];
         console.log(temp.id);
         console.log(temp);
         console.log(kivalaszt.querySelector("img"));
@@ -298,7 +299,7 @@ function KepKirako(div){
         img.src = "img/" + pakli[gomb.id - 30].id + ".png";
         kivalaszt.appendChild(img);
     }
-
+    
 }
 
 function pakliLerak(div){
@@ -310,11 +311,13 @@ function pakliLerak(div){
     cellak[div.id-1] = kartyak[pakli[gomb.id-30].id-1]
     div.dataset.vanbenne=true;
     cellak[div.id-1].kartyae =true;
+    cellak[div.id-1].vanbenne =true;
 
+    
     div.setAttribute("onclick","")
     gomb.id++;
     gomb.setAttribute("onclick","KepKirako(this)");
-
+    
     if (!(kivalaszt.querySelector("img")===null)) {
         var regikep = kivalaszt.querySelector("img");
         kivalaszt.removeChild(regikep)
@@ -352,14 +355,16 @@ function cellaRanyom(div){
         if (ranyomPakli) {
             pakliLerak(div);
             console.log(cellak)
+
+            // van e még a pakliban kártya check 
             if (gomb.id == 53) { //53
                 gomb.disabled=true;
                 gomb.value = "Kifogyott a pakli";
-                
             }
+
         }
         else if(ranyomFelhuzott){
-
+            
             let temp = document.getElementsByClassName("felhuzott")[0];
             console.log(document.getElementsByClassName("felhuzott")[0].querySelector("img"));
             if (!(temp.querySelector("img")===null)) {
@@ -373,6 +378,7 @@ function cellaRanyom(div){
             cellak[div.id-1] = kartyak[pakli[0].id-1]
             div.dataset.vanbenne=true;
             cellak[div.id-1].kartyae =true;
+            div.setAttribute("onclick","")
 
 
         }
@@ -402,10 +408,11 @@ function cellaRanyom(div){
             div.appendChild(img);
             vardiv.setAttribute("onclick","")
             cellak[div.id-1].kartyae = false;
+            vardiv.innerHTML="";
+            div.setAttribute("onclick","")
         }
         
-    /* ------------ gomb visszarakása, készülödés a következö lépésre ----------- */
-
+        cellak[div.id-1].vanbenne =true;
 
 
 
@@ -416,13 +423,12 @@ function cellaRanyom(div){
     ranyomFelhuzott = false;
 
 
-    /* ----------------------- van e még a pakliban kártya check ---------------------- */
 
 
     /*! ------------------------------------ Meg kell nézni hogy tele van e a cellák ----------------------------------- */
 
-    if (teleACella == true) {
-        pontozas();
+    if (teleACella()) {
+        // pontozas();
         document.body.innerHTML = "";
         Main();
         kor++;
@@ -439,9 +445,22 @@ function cellaRanyom(div){
 
 
 function teleACella(){
-    /* ------------------------------------ Végig kell menni a cellán hogy van e minedegyiknek a data-vanbenne = true  ----------------------------------- */
+    /* ------------------------------------ Végig kell menni a cellán hogy van e minedegyiknek a vanbenne = true  ----------------------------------- */
+    db = 0;
+    for (let index = 0; index < cellak.length; index++) {    
+        if (cellak[index].vanbenne == true) {
+            db++;
+        }
+    }
+    if (db == cellak.length) {
+        console.log("teszt")
+        return true;
+    }
+    else{
+        return false;
+    }
 
-    return false;
+
 }
 
 var pontszam = 50;
