@@ -43,7 +43,6 @@ function alapok(){
     varak = document.createElement("div");
 
     gomb;
-    kor++; // Hanyadik körben van a játék
     k = 1;
 
     kartyak=[
@@ -81,6 +80,7 @@ function alapok(){
 
     cellak = [
     ];
+    kor++;
 }
 
 
@@ -428,16 +428,34 @@ function cellaRanyom(div){
     /*! ------------------------------------ Meg kell nézni hogy tele van e a cellák ----------------------------------- */
 
     if (teleACella()) {
-        // pontozas();
-        document.body.innerHTML = "";
-        Main();
-        kor++;
+        if(kor!= 3){
+                    // pontozas();
+                    alert("A körnek vége. A jelenlegi pontszámod: "+pontszam)
+                    document.body.innerHTML = "";
+                    Main();
+                    // kor++;
 
 
-        ranyom = false;
-        ranyomPakli = false;
-        ranyomVar = false;
-        ranyomFelhuzott = false;
+                    ranyom = false;
+                    ranyomPakli = false;
+                    ranyomVar = false;
+                    ranyomFelhuzott = false;
+        }
+        else{
+            // pontozas();
+            alert("A játéknak vége. A végső pontszámod: "+pontszam)
+            kor = 0;
+
+            document.body.innerHTML = "";
+            Main();
+
+
+            ranyom = false;
+            ranyomPakli = false;
+            ranyomVar = false;
+            ranyomFelhuzott = false;
+        }
+
     }
 
     }
