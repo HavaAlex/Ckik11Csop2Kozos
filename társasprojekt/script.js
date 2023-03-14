@@ -244,10 +244,61 @@ function pakliFeltoltese(){
     console.log(pakli)
 }
 
+function sarkany(){
+
+}
+function banya(){
+
+}
+function pap(){
+
+}
+
+
+
+
 function pontozas(){
     sarkany();
     banya();
     pap();
+
+
+    // sor
+    for (let sor = 0; sor < 30; sor+=6) {
+        var pont = 0;
+        var szoroz = 0;
+        for (let oszlop = sor; oszlop < sor+6; oszlop++){
+            if(cellak[oszlop].kartyae==true){
+                pont += cellak[oszlop].value;
+            }
+            else if(cellak[oszlop].kartyae==false){
+                szoroz += cellak[oszlop].value;
+            }
+        }
+        console.log(pont*szoroz);
+        pontszam+= pont*szoroz;
+    }
+
+
+
+    // oszlop
+    for (let sor = 0; sor < 6; sor++) {
+        var pont = 0;
+        var szoroz = 0;
+        for (let oszlop = sor; oszlop < 30; oszlop+=6){
+            if(cellak[oszlop].kartyae==true){
+                pont += cellak[oszlop].value;
+            }
+            else if(cellak[oszlop].kartyae==false){
+                szoroz += cellak[oszlop].value;
+            }
+        }
+        console.log(pont*szoroz);
+        pontszam+= pont*szoroz;
+    }
+
+    ermeSzamolas(pontszam);
+    
 }
 
 function GombKirakasaFelhuzzotKirak(){
@@ -470,7 +521,7 @@ function teleACella(){
             db++;
         }
     }
-    if (db == cellak.length) {
+    if (db == cellak.length+1) {
         console.log("teszt")
         return true;
     }
@@ -483,21 +534,43 @@ function teleACella(){
 
 var pontszam = 50;
 
-function ermeSzamolas(szam){
+function ermeSzamolas(szam) {
     const ermek = [100, 50, 10, 5, 1];
-    const ermekVege = {};
+    const ermekVege = [];
     var maradek = szam;
   
     for (let i = 0; i < ermek.length; i++) {
       const ermeErtek = ermek[i];
       const menyi = Math.floor(maradek / ermeErtek);
       if (menyi > 0) {
-        ermekVege[ermeErtek] = menyi;
+        ermekVege.push({ erme: ermeErtek, db: menyi });
         maradek -= ermeErtek * menyi;
       }
-    }       
+    }
+  
     console.log(ermekVege);
-}
+    console.log(ermekVege[0].db); 
+    for (let i = 0; i < ermekVege.length; i++) {
+      const erme = ermekVege[i];
+      console.log(erme.db);
+      for (let j = 0; j < erme.db; j++) {
+        var img = document.createElement("img");
+        if (erme.erme == 100) {
+          img.src = "penz/100.png";
+        } else if (erme.erme == 50) {
+          img.src = "penz/50.png";
+        } else if (erme.erme == 10) {
+          img.src = "penz/10.png";
+        } else if (erme.erme == 5) {
+          img.src = "penz/5.png";
+        } else if (erme.erme == 1) {
+          img.src = "penz/1.png";
+        }
+        pontokBox.appendChild(img);
+      }
+    }
+  }
+  
 
 
 
@@ -514,7 +587,7 @@ function Main()
     varTablaGeneralas();
     pakliFeltoltese();
     GombKirakasaFelhuzzotKirak();
-    ermeSzamolas(588);
+    ermeSzamolas(250);
 
 }
 
