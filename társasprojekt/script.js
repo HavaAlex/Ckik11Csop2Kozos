@@ -282,7 +282,7 @@ function taliga(){
     for (let index = 0; index < cellak.length; index++) {
         if(cellak[index] && cellak[index].kartyae == true){
             if (index % 6+1 == sor || Math.floor(index / 6)+1 == oszlop) {
-                cellak[index] *= 2
+                cellak[index].value *= 2
             }
         }
     }
@@ -440,6 +440,7 @@ function pakliLerak(div){
 function felhuzottLerak(div){
     ranyomFelhuzott = true;
     ranyom = true;
+    div.setAttribute("onclick","")
 }
 
 
@@ -571,10 +572,11 @@ function cellaRanyom(div){
             // pontozas();
             alert("A játéknak vége. A végső pontszámod: "+pontszam)
             kor = 0;
+            pontszam = 50;
+
 
             document.body.innerHTML = "";
             Main();
-            pontszam = 50;
 
 
             ranyom = false;
@@ -671,7 +673,6 @@ function Main()
     pakliFeltoltese();
     GombKirakasaFelhuzzotKirak();
     ermeSzamolas(pontszam);
-
 }
 
 Main();
