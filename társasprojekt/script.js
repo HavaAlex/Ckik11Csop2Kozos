@@ -245,12 +245,74 @@ function pakliFeltoltese(){
 }
 
 function sarkany(){
+    /* ------------------------------------ a soran, oszlopában minden értéket nulláz, kivéve ha negativ----------------------------------- */
 
+    
+    let sor;
+    let oszlop;
+    for (let index = 0; index < cellak.length; index++) {
+        if(cellak[index] && cellak[index].sign == "sarkany"){
+            sor = index % 6;
+            oszlop = Math.floor(index / 6);
+            break
+        }
+    }
+    for (let index = 0; index < cellak.length; index++) {
+        if(cellak[index] && cellak[index].kartyae == true){
+            if (index % 6+1 == sor || Math.floor(index / 6)+1 == oszlop && cellak[index].value > 0) {
+                cellak[index].value == 0;
+            }
+        }
+    }
+
+    console.log(sor,oszlop)
 }
-function banya(){
+function taliga(){
+    /* ------------------------------------ a soran, oszlopában minden értéket dupláz----------------------------------- */
 
+    let sor;
+    let oszlop;
+    for (let index = 0; index < cellak.length; index++) {
+        if(cellak[index] && cellak[index].sign == "taliga"){
+            sor = index % 6;
+            oszlop = Math.floor(index / 6);
+            break
+        }
+    }
+    for (let index = 0; index < cellak.length; index++) {
+        if(cellak[index] && cellak[index].kartyae == true){
+            if (index % 6+1 == sor || Math.floor(index / 6)+1 == oszlop) {
+                cellak[index] *= 2
+            }
+        }
+    }
+
+    console.log(sor,oszlop)
 }
 function pap(){
+    /* ------------------------------------ a vele 4 mellete lévő várnak a szintjét növeli 1-el ----------------------------------- */
+    let sor;
+    let oszlop;
+    for (let index = 0; index < cellak.length; index++) {
+        if(cellak[index] && cellak[index].sign == "pap"){
+            sor = index % 6;
+            oszlop = Math.floor(index / 6);
+            if (cellak[index-1].kartyae == true) {
+                cellak[index-1].kartyae++;
+            }
+            if (cellak[index+1].kartyae == true) {
+                cellak[index+1].kartyae++;
+            }
+            if (cellak[index+6].kartyae == true) {
+                cellak[index+6].kartyae++;
+            }
+            if (cellak[index-6].kartyae == true) {
+                cellak[index-6].kartyae++;
+            }
+            break
+        }
+    }
+
 
 }
 
@@ -259,7 +321,7 @@ function pap(){
 
 function pontozas(){
     sarkany();
-    banya();
+    taliga();
     pap();
 
 
@@ -385,9 +447,15 @@ function felhuzottLerak(div){
 var varSzam;
 
 function varLerak(div) {
-    ranyom = true;
-    ranyomVar = true;
-    varSzam = div.dataset.az;
+    if (ranyom == false) {
+        ranyom = true;
+        ranyomVar = true;
+        varSzam = div.dataset.az;
+        var img = document.createElement("img");
+        img.src = div.querySelector("img").src;
+        kivalaszt.appendChild(img);
+    }
+
 }
 
 
@@ -438,6 +506,10 @@ function cellaRanyom(div){
             console.log(vardiv);
             document.createElement(img);
             var img = document.createElement("img");
+            if (!(kivalaszt.querySelector("img")===null)) {
+                var regikep = kivalaszt.querySelector("img");
+                kivalaszt.removeChild(regikep)
+            }
             console.log(varSzam)
             if (varSzam <= 4) {
                 img.src = "tornyok/1.png";
@@ -480,31 +552,37 @@ function cellaRanyom(div){
 
     if (teleACella()) {
         if(kor!= 3){
-                    // pontozas();
+            setTimeout(function() {
+                    pontozas();
                     alert("A körnek vége. A jelenlegi pontszámod: "+pontszam)
                     document.body.innerHTML = "";
                     Main();
-                    // kor++;
 
 
                     ranyom = false;
                     ranyomPakli = false;
                     ranyomVar = false;
                     ranyomFelhuzott = false;
+              }, 20);
+
         }
         else{
+            setTimeout(function() {
             // pontozas();
             alert("A játéknak vége. A végső pontszámod: "+pontszam)
             kor = 0;
 
             document.body.innerHTML = "";
             Main();
+            pontszam = 50;
 
 
             ranyom = false;
             ranyomPakli = false;
             ranyomVar = false;
             ranyomFelhuzott = false;
+          }, 20);
+
         }
 
     }
@@ -521,7 +599,7 @@ function teleACella(){
             db++;
         }
     }
-    if (db == cellak.length+1) {
+    if (db == cellak.length) {
         console.log("teszt")
         return true;
     }

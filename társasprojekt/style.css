@@ -140,7 +140,7 @@ img{
     border: 2px solid green;
     color: black;
     padding: 8px 15px;
-    font-size: 16px;
+    font-size: 18px;
     font-family: Verdana, Arial, sans-serif;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -148,7 +148,7 @@ img{
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 100px;
     height: 11vw;
-    width: 11vw;
+    width: 16vw;
   }
   
 .gomb:hover {
@@ -197,4 +197,9 @@ img{
     margin-right: auto;
     border-radius: 6px;
 
+}
+
+
+.korok{
+    color: white;
 }
