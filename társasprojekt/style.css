@@ -7,7 +7,9 @@
 
 
 body{
-    background-color: var(--hatter);
+    /*background-color: var(--hatter);*/
+    background-image: url("hatter.png");
+    background-size: cover;
 }
 #jatekter{
     width: 100%;
@@ -45,10 +47,10 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 35px;
     border: 1px solid red;
     height: 19vw;
-    background-color: var(--kartybox);
+    background-image: url("zoldszinatmenet.png");
     text-align: center;
 
     width: 100%;
@@ -67,16 +69,17 @@ body{
 }
 #pontokbox{
     text-align: center;
-    border-radius: 5px;
+    border-radius: 35px;
     border: 1px solid blue;
     height: 19vw;
-    background-color: var(--pontbox);
+    background-image: url("penzhatter.png");
+    background-size: cover;
 }
 #tabla{
     text-align: center;
     border-radius: 5px;
     width: 45vw;
-    border: 1px solid green;
+    
     height: 38vw;
     display: flex;
     flex-direction: column;
@@ -85,19 +88,21 @@ body{
     text-align: center;
     border-radius: 5px;
     width: 25vw;
-    border: 1px solid yellow;
+    border: 8px solid rgb(97, 97, 18);
     height: 15vw;
+    background-color: rgba(129, 34, 34, 0.386);
+    color: rgb(0, 0, 0);
 }
 .sordiv{
     border-radius: 2px;
-    border: 1px solid black;
+    
     display: flex;
     flex-direction: row;
     height: 7.5vw;
 }
 .oszlopdiv{
-    border-radius: 5px;
-    border: 2px solid red;
+    border-radius: 20px;
+    border: 2px solid rgb(26, 83, 18);
     width: 16.6%;
     margin: 5px;
     border-radius: 10px;
@@ -114,7 +119,7 @@ body{
 .v-oszlopdiv{
 
     border-radius: 5px;
-    border: 2px solid red;
+    border: 2px solid rgb(56, 13, 13);
     width: 6.5%;
     margin: 5px;
     border-radius: 10px;
@@ -131,7 +136,7 @@ img{
 
 .gomb {
     margin-top: 2vw;
-    background-color: greenyellow;
+    background-color: rgb(255, 106, 47);
     border: 2px solid green;
     color: black;
     padding: 8px 15px;
@@ -141,6 +146,9 @@ img{
     letter-spacing: 1.5px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+    height: 11vw;
+    width: 11vw;
   }
   
 .gomb:hover {
@@ -175,4 +183,18 @@ img{
 
 .korok p{
     color: wheat;
+}
+.erme{
+    height: 5vw;
+    width: 5vw;
+}
+
+#ermekirat{
+    color: rgb(185, 240, 84);
+    background-color: rgb(8, 51, 51);
+    width:fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+
 }

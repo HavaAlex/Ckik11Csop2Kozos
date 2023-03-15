@@ -94,7 +94,7 @@ function JatekterBetoltes()
     kartyabox.innerHTML='<h2>Pakli</h2>';
     kartyaBox.appendChild(kartyabox);
     let pontokbox = document.createElement("div")
-    pontokbox.innerHTML='<h2>Érmék</h2>';
+    pontokbox.innerHTML='<h2 id="ermekirat">Érmék</h2>';
     pontokBox.appendChild(pontokbox);
 
     /* -------------------------- Tábla gen ------------------------- */
@@ -557,14 +557,19 @@ function ermeSzamolas(szam) {
         var img = document.createElement("img");
         if (erme.erme == 100) {
           img.src = "penz/100.png";
+          img.className ="erme";
         } else if (erme.erme == 50) {
           img.src = "penz/50.png";
+          img.className ="erme";
         } else if (erme.erme == 10) {
           img.src = "penz/10.png";
+          img.className ="erme";
         } else if (erme.erme == 5) {
           img.src = "penz/5.png";
+          img.className ="erme";
         } else if (erme.erme == 1) {
           img.src = "penz/1.png";
+          img.className ="erme";
         }
         pontokBox.appendChild(img);
       }
@@ -587,7 +592,7 @@ function Main()
     varTablaGeneralas();
     pakliFeltoltese();
     GombKirakasaFelhuzzotKirak();
-    ermeSzamolas(250);
+    ermeSzamolas(pontszam);
 
 }
 
